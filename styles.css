@@ -144,9 +144,12 @@ h1 em { color:#5d9fd1; font-style:normal; }
 .orbit-one { width:260px; height:260px; transform:rotate(25deg) skewX(-8deg); }
 .orbit-two { width:390px; height:210px; transform:rotate(-28deg) skewX(-6deg); }
 .orbit-core { width:108px; height:108px; display:grid; place-items:center; border-radius:50%; background:linear-gradient(140deg,#24465b,#0e2237); box-shadow:0 0 0 10px rgba(137,243,207,.04), 0 0 80px rgba(137,243,207,.18); font:700 27px var(--heading); color:var(--accent); letter-spacing:.08em; }
+.about-photo { position:relative; z-index:2; width:82%; height:82%; object-fit:cover; border-radius:20px; box-shadow:0 30px 70px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.08); }
 .about-copy h2 { font-size:clamp(38px,4.7vw,61px); margin:15px 0 20px; }
 .about-copy h2 span { color:#8aa8bd; }
 .about-copy p { color:#9dadbc; max-width:690px; font-size:15px; }
+.about-founder { font-size:14px; margin-top:16px; padding-top:16px; border-top:1px solid rgba(255,255,255,.1); }
+.about-founder strong { color:#e7edf2; }
 .about-points { display:grid; grid-template-columns:1fr 1fr; gap:10px 20px; margin-top:28px; }
 .about-points span { font-size:12px; color:#c0cbd5; }
 .about-points span::first-letter { color:var(--accent); }
@@ -169,6 +172,12 @@ h1 em { color:#5d9fd1; font-style:normal; }
 .contact-copy p { color:#a2b2c1; max-width:660px; }
 .contact-copy .btn { margin-top:18px; background:white; color:var(--ink); }
 .contact-copy .btn span { color:#3b8e7b; }
+.contact-details { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:30px; }
+.contact-detail { display:flex; align-items:flex-start; gap:11px; }
+.contact-detail-icon { width:32px; height:32px; flex:0 0 32px; display:grid; place-items:center; border-radius:9px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.1); font-size:14px; color:var(--accent); }
+.contact-detail small { display:block; color:#8598aa; font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:3px; }
+.contact-detail span { font-size:13px; color:#e2e8ee; font-weight:600; word-break:break-word; }
+.contact-detail:hover span { color:white; }
 .contact-side { position:relative; z-index:2; padding:8px 0; }
 .contact-label { font-size:10px; letter-spacing:.16em; color:#7f93a7; font-weight:700; }
 .fit-list { display:grid; gap:9px; margin-top:18px; }
@@ -226,6 +235,7 @@ h1 em { color:#5d9fd1; font-style:normal; }
   .tool-cloud { min-height:300px; padding:24px; }
   .about-points { grid-template-columns:1fr; }
   .contact-card { padding:32px 24px; }
+  .contact-details { grid-template-columns:1fr; }
   .footer-grid { grid-template-columns:1fr; gap:28px; }
   .footer-contact { grid-column:auto; }
   .footer-bottom { flex-direction:column; }
