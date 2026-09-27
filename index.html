@@ -6,6 +6,11 @@
   <meta name="description" content="Quantum Spectra helps small businesses turn scattered data into automated reporting, business intelligence dashboards, marketing analytics, and practical AI solutions." />
   <meta name="theme-color" content="#07111f" />
   <title>Quantum Spectra | Data, BI & Automation for Small Businesses</title>
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -17,7 +22,7 @@
   <header class="site-header" id="top">
     <div class="container nav-wrap">
       <a class="brand" href="#top" aria-label="Quantum Spectra home">
-        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <img class="brand-mark" src="assets/logo-icon.png" alt="" aria-hidden="true" />
         <span>QUANTUM <b>SPECTRA</b></span>
       </a>
 
@@ -316,6 +321,14 @@
           <div class="eyebrow"><i></i> START WITH A CONVERSATION</div>
           <h2>Have data. Need <em>clarity?</em></h2>
           <p>Tell us what you are currently doing manually, where your data lives, or what you wish you could see in one place.</p>
+
+          <div class="personal-note"><span class="personal-note-icon">👤</span><span>You'll be talking directly with <strong>me, Ali</strong> — the person who scopes and builds your project, not a call agent or salesperson.</span></div>
+
+          <div class="pricing-note">
+            <div><small>Hourly</small><strong>From $25 / hr</strong></div>
+            <div><small>Project-based</small><strong>Scoped to fit your budget</strong></div>
+          </div>
+
           <a class="btn btn-primary" href="mailto:alidatainsights@gmail.com?subject=Quantum%20Spectra%20Project%20Inquiry">Email Quantum Spectra <span>↗</span></a>
 
           <div class="contact-details">
@@ -335,12 +348,65 @@
               <span class="contact-detail-icon">◷</span>
               <span><small>Working hours</small>Mon–Sat, 9:00 AM–7:00 PM PKT (GMT+5)</span>
             </div>
+            <a class="contact-detail" href="https://www.upwork.com/freelancers/~016b28ef2f2c6cfc1a" target="_blank" rel="noopener">
+              <span class="contact-detail-icon">★</span>
+              <span><small>Upwork</small>Top Rated · 100% Job Success</span>
+            </a>
           </div>
+
+          <div class="contact-label fit-label">GOOD FIT FOR</div>
+          <div class="fit-list fit-list-inline"><span>Small & growing businesses</span><span>Marketing teams</span><span>Finance & operations</span><span>Owners who want less manual reporting</span></div>
         </div>
+
         <div class="contact-side">
-          <div class="contact-label">GOOD FIT FOR</div>
-          <div class="fit-list"><span>Small & growing businesses</span><span>Marketing teams</span><span>Finance & operations</span><span>Owners who want less manual reporting</span></div>
-          <div class="contact-note">Response starts with understanding the problem — not selling a giant package. Based in Islamabad (PKT, GMT+5) and working with clients worldwide.</div>
+          <form class="contact-form" id="contact-form" novalidate>
+            <div class="contact-label">SEND A PROJECT BRIEF</div>
+
+            <label class="form-field">
+              <span>Name</span>
+              <input type="text" name="name" placeholder="Your name" required />
+            </label>
+
+            <div class="form-row">
+              <label class="form-field">
+                <span>Email</span>
+                <input type="email" name="email" placeholder="you@company.com" required />
+              </label>
+              <label class="form-field">
+                <span>Phone / WhatsApp <em>(optional)</em></span>
+                <input type="tel" name="phone" placeholder="+1 555 000 0000" />
+              </label>
+            </div>
+
+            <label class="form-field">
+              <span>What do you need help with?</span>
+              <select name="topic">
+                <option>Business dashboards (Power BI / Looker Studio / Excel)</option>
+                <option>Reporting automation</option>
+                <option>Marketing analytics</option>
+                <option>AI & data assistants</option>
+                <option>Financial modeling</option>
+                <option>Something else</option>
+              </select>
+            </label>
+
+            <label class="form-field">
+              <span>Preferred pricing</span>
+              <select name="budget">
+                <option>Not sure yet</option>
+                <option>Hourly — from $25/hr</option>
+                <option>Project-based / fixed quote</option>
+              </select>
+            </label>
+
+            <label class="form-field">
+              <span>Tell us about the project</span>
+              <textarea name="message" rows="4" placeholder="What are you currently doing manually? Where does your data live? What do you want to see or automate?" required></textarea>
+            </label>
+
+            <button class="btn btn-primary form-submit" type="submit">Send project brief <span>↗</span></button>
+            <p class="form-note">This opens your email client with your details pre-filled, addressed to alidatainsights@gmail.com — nothing is sent from this page directly.</p>
+          </form>
         </div>
       </div>
     </section>
@@ -349,8 +415,9 @@
   <footer class="site-footer">
     <div class="container footer-grid">
       <div>
-        <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span><span>QUANTUM <b>SPECTRA</b></span></a>
+        <a class="brand" href="#top"><img class="brand-mark" src="assets/logo-icon.png" alt="" aria-hidden="true" /><span>QUANTUM <b>SPECTRA</b></span></a>
         <p>Data, business intelligence and automation for small businesses.</p>
+        <a class="footer-social" href="https://www.upwork.com/freelancers/~016b28ef2f2c6cfc1a" target="_blank" rel="noopener">View profile on Upwork <span>↗</span></a>
       </div>
       <div class="footer-links"><a href="#services">Services</a><a href="#work">Work</a><a href="#testimonials">Testimonials</a><a href="#contact">Contact</a></div>
       <div class="footer-contact">
