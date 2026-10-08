@@ -215,6 +215,14 @@ h1 em { color:#5d9fd1; font-style:normal; }
 .form-field input:focus, .form-field select:focus, .form-field textarea:focus { outline:2px solid var(--accent-2); outline-offset:1px; }
 .form-field input::placeholder, .form-field textarea::placeholder { color:#8b98a6; }
 .form-submit { justify-content:center; margin-top:4px; width:100%; }
+.contact-form { position:relative; }
+.form-field input.invalid, .form-field textarea.invalid { border-color:#ff6b7a; outline:2px solid rgba(255,107,122,.45); outline-offset:1px; }
+.form-submit:disabled { opacity:.7; cursor:progress; }
+.form-status { font-size:13px; line-height:1.6; border-radius:11px; }
+.form-status.success, .form-status.error { padding:12px 14px; }
+.form-status.success { background:rgba(137,243,207,.12); border:1px solid rgba(137,243,207,.35); color:#bff7e4; }
+.form-status.error { background:rgba(255,107,122,.10); border:1px solid rgba(255,107,122,.35); color:#ffc2c9; }
+.form-status a, .form-note a { color:var(--accent); font-weight:700; text-decoration:underline; }
 .form-note { font-size:11px; color:#8598aa; line-height:1.6; margin:0; }
 
 .site-footer { background:#06101c; color:white; padding:60px 0 25px; }
