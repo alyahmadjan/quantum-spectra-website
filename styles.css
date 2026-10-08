@@ -233,6 +233,10 @@ h1 em { color:#5d9fd1; font-style:normal; }
 
 .reveal { opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
 .reveal.visible { opacity:1; transform:none; }
+.case-card.wide { grid-column:1 / -1; flex-direction:row; }
+.case-card.wide .case-image { flex:1.25; aspect-ratio:auto; border-bottom:0; border-right:1px solid rgba(255,255,255,.08); }
+.case-card.wide .case-body { flex:1; justify-content:center; }
+.case-card.wide .case-footer { margin-top:0; }
 .reveal-delay { transition-delay:.12s; } .reveal-delay-sm { transition-delay:.07s; }
 
 @media (max-width: 1000px) {
@@ -242,6 +246,8 @@ h1 em { color:#5d9fd1; font-style:normal; }
   .service-grid { grid-template-columns:repeat(2,1fr); }
   .case-grid { grid-template-columns:1fr; }
   .case-card { min-height:300px; }
+  .case-card.wide { flex-direction:column; }
+  .case-card.wide .case-image { aspect-ratio:16/9.3; border-right:0; border-bottom:1px solid rgba(255,255,255,.08); flex:none; }
   .testimonial-grid { grid-template-columns:1fr; }
   .about-card { min-height:370px; max-width:600px; }
   .contact-card { grid-template-columns:1fr; }
