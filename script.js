@@ -29,20 +29,36 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 document.getElementById('year').textContent = new Date().getFullYear();
 
 // ---- Contact form ----
-// Paste your Web3Forms access key below (free, from web3forms.com).
-// Until a key is set, the form falls back to opening the visitor's email client.
-const FORM_ACCESS_KEY = '6a546fe0-930b-4513-ac04-395c67969639';
 const CONTACT_EMAIL = 'alidatainsights@gmail.com';
+const FORM_ENDPOINT = 'https://api.web3forms.com/submit';
 
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
-  const statusEl = contactForm.querySelector('.form-status');
+  console.info('[Quantum Spectra] contact form ready (v3)');
   const submitBtn = contactForm.querySelector('.form-submit');
+  const successEl = contactForm.querySelector('.form-success');
+  let statusEl = contactForm.querySelector('.form-status');
+  if (!statusEl) {
+    statusEl = document.createElement('div');
+    statusEl.className = 'form-status';
+    statusEl.setAttribute('role', 'status');
+    statusEl.setAttribute('aria-live', 'polite');
+    submitBtn.insertAdjacentElement('afterend', statusEl);
+  }
   const submitLabel = submitBtn.innerHTML;
 
   const setStatus = (type, html) => {
     statusEl.className = 'form-status ' + type;
     statusEl.innerHTML = html;
+  };
+
+  const showSent = (firstName) => {
+    if (successEl) {
+      const n = successEl.querySelector('.sent-name');
+      if (n) n.textContent = firstName ? ', ' + firstName : '';
+    }
+    contactForm.classList.add('is-sent');
+    contactForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
   const mailtoFallback = (d) => {
@@ -67,7 +83,7 @@ if (contactForm) {
       d[k] = (fd.get(k) || '').toString().trim();
     });
 
-    // Honeypot: real visitors never fill this in
+    // Honeypot: real visitors never tick this
     if (fd.get('botcheck')) return;
 
     // Validation
@@ -83,33 +99,21 @@ if (contactForm) {
       return;
     }
 
-    // No key yet: keep the old email-client behaviour
-    if (FORM_ACCESS_KEY.startsWith('YOUR_')) {
-      window.location.href = mailtoFallback(d);
-      return;
-    }
+    const subjectEl = contactForm.querySelector('[name="subject"]');
+    if (subjectEl) subjectEl.value = `Quantum Spectra inquiry: ${d.topic}`;
 
     submitBtn.disabled = true;
     submitBtn.innerHTML = 'Sending… <span>↻</span>';
     setStatus('', '');
 
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch(FORM_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          access_key: FORM_ACCESS_KEY,
-          subject: `Quantum Spectra inquiry: ${d.topic}`,
-          from_name: 'Quantum Spectra website',
-          name: d.name,
-          email: d.email,
-          phone: d.phone || 'Not provided',
-          topic: d.topic,
-          pricing: d.budget,
-          message: d.message
-        })
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(contactForm)
       });
       const json = await res.json();
+      console.info('[Quantum Spectra] form response', res.status, json);
       if (!res.ok || !json.success) throw new Error(json.message || 'Request failed');
 
       // Event for Google Tag Manager / GA4
@@ -117,9 +121,11 @@ if (contactForm) {
       window.dataLayer.push({ event: 'generate_lead', form_id: 'contact-form', form_topic: d.topic });
 
       contactForm.reset();
-      setStatus('success', `<strong>Thanks, ${d.name.split(' ')[0]}.</strong> Your brief has been sent and I'll get back to you by email.`);
+      setStatus('', '');
+      showSent(d.name.split(' ')[0]);
     } catch (err) {
-      setStatus('error', `Something went wrong sending that. Please try again, or <a href="${mailtoFallback(d)}">email me directly</a> at ${CONTACT_EMAIL}.`);
+      console.error('[Quantum Spectra] form error', err);
+      setStatus('error', `Sorry, that didn't send. Please try again, or <a href="${mailtoFallback(d)}">email me directly</a> at ${CONTACT_EMAIL}.`);
     } finally {
       submitBtn.disabled = false;
       submitBtn.innerHTML = submitLabel;
@@ -129,4 +135,18 @@ if (contactForm) {
   contactForm.querySelectorAll('input, textarea').forEach((el) =>
     el.addEventListener('input', () => el.classList.remove('invalid'))
   );
+
+  const another = contactForm.querySelector('.send-another');
+  if (another) another.addEventListener('click', () => {
+    contactForm.classList.remove('is-sent');
+    setStatus('', '');
+    const first = contactForm.querySelector('[name="name"]');
+    if (first) first.focus();
+  });
+
+  // Returning from the no-JavaScript fallback redirect
+  if (new URLSearchParams(window.location.search).get('sent') === '1') {
+    showSent('');
+    if (window.history && history.replaceState) history.replaceState(null, '', window.location.pathname + '#contact');
+  }
 }

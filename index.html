@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20261008" />
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -383,7 +383,11 @@
         </div>
 
         <div class="contact-side">
-          <form class="contact-form" id="contact-form" novalidate>
+          <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+            <input type="hidden" name="access_key" value="6a546fe0-930b-4513-ac04-395c67969639" />
+            <input type="hidden" name="subject" value="New project brief from Quantum Spectra website" />
+            <input type="hidden" name="from_name" value="Quantum Spectra website" />
+            <input type="hidden" name="redirect" value="https://alyahmadjan.github.io/quantum-spectra-website/?sent=1#contact" />
             <div class="contact-label">SEND A PROJECT BRIEF</div>
 
             <label class="form-field">
@@ -428,11 +432,17 @@
               <textarea name="message" rows="4" placeholder="What are you currently doing manually? Where does your data live? What do you want to see or automate?" required></textarea>
             </label>
 
-            <input type="text" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" />
+            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" />
 
             <button class="btn btn-primary form-submit" type="submit">Send project brief <span>↗</span></button>
             <div class="form-status" role="status" aria-live="polite"></div>
             <p class="form-note">Your brief is sent straight to my inbox, and I reply by email. Prefer your own email app? Write to <a href="mailto:alidatainsights@gmail.com">alidatainsights@gmail.com</a>.</p>
+                      <div class="form-success" role="status" aria-live="polite">
+              <div class="check">✓</div>
+              <h3>Your brief has been sent</h3>
+              <p>Thanks<span class="sent-name"></span> — I've received your project details and will reply to the email you provided.</p>
+              <button type="button" class="btn btn-secondary send-another">Send another brief</button>
+            </div>
           </form>
         </div>
       </div>
@@ -457,6 +467,6 @@
     <div class="container footer-bottom"><span>© <span id="year"></span> Quantum Spectra. All rights reserved.</span><span>Built for better decisions.</span></div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=20261008"></script>
 </body>
 </html>
