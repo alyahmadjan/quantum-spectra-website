@@ -182,3 +182,29 @@ if (faqToggle) {
     if (!open) faqMore.querySelectorAll('details[open]').forEach((d) => d.removeAttribute('open'));
   });
 }
+
+// ---- Header shadow, back-to-top, active nav link ----
+const siteHeader = document.querySelector('.site-header');
+const toTop = document.querySelector('.to-top');
+const onScroll = () => {
+  const y = window.scrollY || document.documentElement.scrollTop;
+  if (siteHeader) siteHeader.classList.toggle('scrolled', y > 8);
+  if (toTop) toTop.classList.toggle('show', y > 900);
+};
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+if (toTop) toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+const navLinks = [...document.querySelectorAll('.site-nav > a[href^="#"]:not(.nav-cta)')];
+if (navLinks.length && 'IntersectionObserver' in window) {
+  const byId = new Map(navLinks.map((a) => [a.getAttribute('href').slice(1), a]));
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      navLinks.forEach((a) => { a.classList.remove('active'); a.removeAttribute('aria-current'); });
+      const link = byId.get(entry.target.id);
+      if (link) { link.classList.add('active'); link.setAttribute('aria-current', 'true'); }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  byId.forEach((_, id) => { const sec = document.getElementById(id); if (sec) spy.observe(sec); });
+}
