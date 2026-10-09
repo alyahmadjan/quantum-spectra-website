@@ -303,3 +303,40 @@ h1 em { color:#5d9fd1; font-style:normal; }
   .reveal { opacity:1; transform:none; transition:none; }
   * { transition:none !important; }
 }
+
+/* ---- Email menu ---- */
+.email-menu { position:relative; display:inline-block; margin-top:18px; }
+.contact-copy .email-menu .btn { margin-top:0; }
+.email-options { position:absolute; top:calc(100% + 8px); left:0; z-index:20; min-width:250px; padding:6px; background:#fff; color:var(--ink); border-radius:14px; box-shadow:0 22px 50px rgba(3,10,20,.38); }
+.email-options a, .email-options button { display:block; width:100%; text-align:left; padding:11px 14px; border:0; background:none; border-radius:10px; font:700 13px var(--body); color:var(--ink); cursor:pointer; }
+.email-options a:hover, .email-options button:hover, .email-options a:focus-visible, .email-options button:focus-visible { background:#eef3f8; outline:none; }
+.email-trigger[aria-expanded="true"] span { display:inline-block; transform:rotate(90deg); }
+
+/* ---- Desktop fit: scale the layout so more of the page fits at 100% zoom ---- */
+body { overflow-x:clip; }
+@media (min-width:1001px) {
+  .container { width:min(1120px, calc(100% - 64px)); }
+  .section-pad { padding:84px 0; }
+  .nav-wrap { min-height:66px; }
+  .hero { padding-top:52px; padding-bottom:64px; }
+  .hero-grid { gap:48px; }
+  h1 { font-size:clamp(42px, 4.6vw, 64px); margin-top:14px; }
+  .hero-text { font-size:17px; margin-top:20px; }
+  .hero-actions { margin-top:26px; }
+  .micro-proof { margin-top:20px; }
+  .hero-visual { min-height:430px; }
+  .visual-card { width:min(500px, 100%); padding:22px; }
+  .visual-value { margin-top:20px; font-size:38px; }
+  .section-heading h2, .integration-copy h2, .about-copy h2 { font-size:clamp(34px, 3.8vw, 50px); }
+  .contact-copy h2 { font-size:clamp(36px, 4vw, 54px); }
+  .contact-card { padding:42px; gap:44px; }
+  .service-card { min-height:290px; }
+}
+@media (min-width:1001px) and (max-height:820px) {
+  .hero { padding-top:36px; padding-bottom:48px; }
+  h1 { font-size:clamp(40px, 4.2vw, 56px); }
+  .hero-text { font-size:16px; margin-top:16px; }
+  .hero-actions { margin-top:20px; }
+  .hero-visual { min-height:380px; }
+  .section-pad { padding:72px 0; }
+}

@@ -150,3 +150,38 @@ if (contactForm) {
     if (window.history && history.replaceState) history.replaceState(null, '', window.location.pathname + '#contact');
   }
 }
+
+// ---- Email Quantum Spectra menu ----
+const emailMenu = document.querySelector('.email-menu');
+if (emailMenu) {
+  const trigger = emailMenu.querySelector('.email-trigger');
+  const options = emailMenu.querySelector('.email-options');
+  const copyBtn = emailMenu.querySelector('.copy-email');
+  const setOpen = (open) => {
+    options.hidden = !open;
+    trigger.setAttribute('aria-expanded', String(open));
+  };
+  trigger.addEventListener('click', (e) => { e.stopPropagation(); setOpen(options.hidden); });
+  document.addEventListener('click', (e) => { if (!emailMenu.contains(e.target)) setOpen(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { setOpen(false); trigger.focus(); } });
+  options.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+
+  copyBtn.addEventListener('click', async () => {
+    let ok = false;
+    try {
+      await navigator.clipboard.writeText(CONTACT_EMAIL);
+      ok = true;
+    } catch (err) {
+      const ta = document.createElement('textarea');
+      ta.value = CONTACT_EMAIL;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { ok = document.execCommand('copy'); } catch (e2) { ok = false; }
+      ta.remove();
+    }
+    copyBtn.textContent = ok ? 'Copied ✓ ' + CONTACT_EMAIL : 'Copy failed. Email: ' + CONTACT_EMAIL;
+    setTimeout(() => { copyBtn.textContent = 'Copy email address'; setOpen(false); }, 1800);
+  });
+}
