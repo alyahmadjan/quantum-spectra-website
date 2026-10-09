@@ -151,37 +151,34 @@ if (contactForm) {
   }
 }
 
-// ---- Email Quantum Spectra menu ----
-const emailMenu = document.querySelector('.email-menu');
-if (emailMenu) {
-  const trigger = emailMenu.querySelector('.email-trigger');
-  const options = emailMenu.querySelector('.email-options');
-  const copyBtn = emailMenu.querySelector('.copy-email');
-  const setOpen = (open) => {
-    options.hidden = !open;
-    trigger.setAttribute('aria-expanded', String(open));
-  };
-  trigger.addEventListener('click', (e) => { e.stopPropagation(); setOpen(options.hidden); });
-  document.addEventListener('click', (e) => { if (!emailMenu.contains(e.target)) setOpen(false); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { setOpen(false); trigger.focus(); } });
-  options.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+// ---- Email Quantum Spectra: opens a Gmail compose popup on desktop ----
+const emailBtn = document.querySelector('.email-trigger');
+if (emailBtn) {
+  emailBtn.addEventListener('click', (e) => {
+    // Phones and tablets: let the normal mailto link open their mail app
+    if (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) return;
+    e.preventDefault();
+    const url = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(CONTACT_EMAIL) +
+                '&su=' + encodeURIComponent('Quantum Spectra Project Inquiry');
+    const w = 720, h = 680;
+    const left = Math.max(0, Math.round((window.screen.width - w) / 2));
+    const top = Math.max(0, Math.round((window.screen.height - h) / 2));
+    const win = window.open(url, 'qs-email', `popup=yes,width=${w},height=${h},left=${left},top=${top}`);
+    // Popup blocked: fall back to the normal email link
+    if (!win) window.location.href = emailBtn.href;
+  });
+}
 
-  copyBtn.addEventListener('click', async () => {
-    let ok = false;
-    try {
-      await navigator.clipboard.writeText(CONTACT_EMAIL);
-      ok = true;
-    } catch (err) {
-      const ta = document.createElement('textarea');
-      ta.value = CONTACT_EMAIL;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
-      try { ok = document.execCommand('copy'); } catch (e2) { ok = false; }
-      ta.remove();
-    }
-    copyBtn.textContent = ok ? 'Copied ✓ ' + CONTACT_EMAIL : 'Copy failed. Email: ' + CONTACT_EMAIL;
-    setTimeout(() => { copyBtn.textContent = 'Copy email address'; setOpen(false); }, 1800);
+// ---- FAQ: show more questions ----
+const faqToggle = document.querySelector('.faq-toggle');
+if (faqToggle) {
+  const faqMore = document.getElementById('faq-more');
+  const faqLabel = faqToggle.querySelector('.faq-toggle-label');
+  faqToggle.addEventListener('click', () => {
+    const open = faqToggle.getAttribute('aria-expanded') !== 'true';
+    faqToggle.setAttribute('aria-expanded', String(open));
+    faqMore.classList.toggle('open', open);
+    faqLabel.textContent = open ? 'Show fewer questions' : 'More questions';
+    if (!open) faqMore.querySelectorAll('details[open]').forEach((d) => d.removeAttribute('open'));
   });
 }
